@@ -105,4 +105,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias pc="proxychains4"
+alias ra="ranger"
+
 [[ -s /home/gaorl/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaorl/.autojump/etc/profile.d/autojump.sh
+
+export ACROBAT_PATH=/opt/Adobe/Reader9
+
+export CSCOPE_DB="~/E_ROC/apps/qnx_ap/cscope.out"
