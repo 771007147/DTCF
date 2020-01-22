@@ -6,7 +6,10 @@ filetype on
 " 根据侦测到的不同类型加载对应的插件
 filetype plugin on
 
+" Vim配色
+syntax enable
 set background=dark
+"colorscheme solarized
 "colorscheme solarized
 "colorscheme molokai
 
@@ -60,6 +63,7 @@ Plugin 'mbbill/undotree'
 Plugin 'preservim/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'spf13/vim-autoclose'
 " 插件列表结束
 "
 call vundle#end()
@@ -100,6 +104,9 @@ endif
 map	<Leader>u	:UndotreeToggle	<CR>
 map	<Leader>e	:NERDTreeToggle <CR>
 map	<Leader>t	:TagbarToggle	<CR>
+map	<Leader>w	<c-w>
+map	<Leader>q	:q!	<CR>
+
 
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
