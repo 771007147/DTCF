@@ -26,6 +26,8 @@ set cursorline
 " 高亮显示搜索结果
 set hlsearch
 
+" 设置 leader 键
+let mapleader=" "
 
 " 开启实时搜索功能
 set incsearch
@@ -51,46 +53,17 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'derekwyatt/vim-protodef'
-Plugin 'scrooloose/nerdtree'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'lilydjwg/fcitx.vim'
+Plugin 'mbbill/undotree'
+Plugin 'preservim/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
 " 插件列表结束
+"
 call vundle#end()
 filetype plugin indent on
-
-
-" Cscope
-" if filereadable("cscope.out") 
-"    cs add cscope.out 
-" endif 
-
-"if has("cscope")
-"	set cscopetag   " 使支持用 Ctrl+]  和 Ctrl+t 快捷键在代码间跳来跳去
-"	" check cscope for definition of a symbol before checking ctags:
-"	" set to 1 if you want the reverse search order.
-"	set csto=1
-"
-"	" add any cscope database in current directory
-"	if filereadable("cscope.out")
-"		cs add ~/E_ROC/apps/qnx_ap/cscope.out
-"		" else add the database pointed to by environment variable
-"	elseif $CSCOPE_DB !=""
-"		cs add $CSCOPE_DB
-"	endif
-"
-"	" show msg when any other cscope db added
-"	set cscopeverbose
-"
-"	nmap <C-/>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-"	nmap <C-/>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-"	nmap <C-/>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-"	nmap <C-/>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-"	nmap <C-/>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-"	nmap <C-/>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-"	nmap <C-/>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-"	nmap <C-/>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-"endif
 
 if has("cscope")
 	set csprg=/usr/bin/cscope
@@ -99,9 +72,19 @@ if has("cscope")
 	set nocsverb
 	if filereadable("cscope.out")
 		cs add cscope.out
-	elseif $CSCOPE_DB != ""
-		cs add $CSCOPE_DB
 	endif
+	"if $CSCOPE_DB != ""
+	"	cs add $CSCOPE_DB
+	"endif	
+	"if $CSCOPE_DB_ADP_COOL != ""
+	"	cs add $CSCOPE_DB_ADP_COOL 
+	"endif	
+	if $CSCOPE_DB_ADP_COOL_HQX != ""
+		cs add $CSCOPE_DB_ADP_COOL_HQX
+	endif	
+	if $CSCOPE_DB_MARIO_HQX != ""
+		cs add $CSCOPE_DB_MARIO_HQX
+	endif	
 	set csverb
 	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -112,6 +95,11 @@ if has("cscope")
 	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
+
+"map
+map	<Leader>u	:UndotreeToggle	<CR>
+map	<Leader>e	:NERDTreeToggle <CR>
+map	<Leader>t	:TagbarToggle	<CR>
 
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
