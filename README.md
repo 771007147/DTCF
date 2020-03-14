@@ -1,5 +1,6 @@
-### UbuntuConfigs
-Ubuntu development config files
+## Linux Development Configs
+
+Linux development config files
 
 #### .zshrc
 zsh config file
