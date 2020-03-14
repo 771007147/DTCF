@@ -7,8 +7,7 @@ export ZSH="/home/gaorl/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="ys"
 
 # Set list of themes to pick from when loading at random
@@ -71,10 +70,8 @@ ZSH_THEME="ys"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-	autojump
-	zsh-syntax-highlighting
-	zsh-autosuggestions
-	)
+        zsh-syntax-highlighting
+        zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,11 +101,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias pc="proxychains4"
-alias ra="ranger"
-
+# QNX env
+PATH="/home/gaorl/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/gaorl/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/gaorl/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/gaorl/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/gaorl/perl5"; export PERL_MM_OPT;
+# autojump
 [[ -s /home/gaorl/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaorl/.autojump/etc/profile.d/autojump.sh
-
-export ACROBAT_PATH=/opt/Adobe/Reader9
-
-export CSCOPE_DB="~/E_ROC/apps/qnx_ap/cscope.out"

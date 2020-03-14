@@ -1,7 +1,9 @@
-# UbuntuConfigs
-Ubuntu`s config files
+### UbuntuConfigs
+Ubuntu development config files
 
-1. `.zshrc`
-> zsh配置文件
-2. `vimrc`
-> vim配置文件
+#### .zshrc
+zsh config file
+#### .vimrc
+vim config file
+#### .tmux.conf
+tmux config file

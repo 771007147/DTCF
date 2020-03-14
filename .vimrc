@@ -64,6 +64,7 @@ Plugin 'preservim/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'spf13/vim-autoclose'
+Plugin 'Valloric/YouCompleteMe'
 " 插件列表结束
 "
 call vundle#end()
