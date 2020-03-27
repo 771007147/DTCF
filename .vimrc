@@ -72,24 +72,15 @@ let mapleader=" "
 map      <Leader>u	:UndotreeToggle	<CR>
 map      <Leader>e	:NERDTreeToggle <CR>
 map      <Leader>t	:TagbarToggle	<CR>
-<<<<<<< 31bd29a5db2d90bb0b0a4e5bfbf30687a448d3f7
-map      <Leader>q	:q<CR>
-map      <Leader>Q	:q!<CR>
-vnoremap <Leader>y  "+y
-nmap     <Leader>p  "+p
-nmap     <Leader>w  :w<CR>
-" 依次遍历子窗口
-nnoremap nw <C-W><C-W>
-=======
 nmap     <Leader>q	:q  <CR>
 nmap     <Leader>Q	:q! <CR>
 nmap     <Leader>y  "+y
 nmap     <Leader>p  "+p
 nmap     <Leader>w  :w  <CR>
 nmap     <Leader>W  :wq <CR>
+
 " 依次遍历子窗口
 nnoremap nw         <C-W><C-W>
->>>>>>> Update .vimrc
 " 跳转至右方的窗口
 nnoremap <Leader>lw <C-W>l
 " 跳转至左方的窗口
