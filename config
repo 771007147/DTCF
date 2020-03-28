@@ -1,0 +1,53 @@
+[global_config]
+  scroll_tabbar = True
+  suppress_multiple_term_dialog = True
+  title_font = Monaco 11
+  title_hide_sizetext = True
+  title_use_system_font = False
+[keybindings]
+  close_term = <Primary>q
+  close_window = <Primary><Shift>w
+  cycle_next = <Primary>n
+  new_tab = <Primary>t
+  new_window = <Primary><Shift>t
+  next_profile = <Primary><Shift>x
+  next_tab = <Primary>o
+  page_down = Page_Down
+  page_up = Page_Up
+  split_horiz = <Primary>minus
+  split_vert = <Primary>backslash
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_10 = <Alt>0
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = <Alt>6
+  switch_to_tab_7 = <Alt>7
+  switch_to_tab_8 = <Alt>8
+  switch_to_tab_9 = <Alt>9
+  toggle_zoom = <Primary>f
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    allow_bold = False
+    background_color = "#2c3539"
+    background_image = None
+    copy_on_selection = True
+    font = Monaco 12
+    foreground_color = "#c4c4c4"
+    palette = "#000000:#ff3b30:#4cd964:#ffcc00:#0095ff:#ff2d55:#5ac8fa:#ffffff:#686868:#ff3b30:#4cd964:#ffcc00:#0095ff:#ff2d55:#5ac8fa:#bfbfbf"
+    scroll_on_keystroke = False
+    scroll_on_output = False
+    scrollback_infinite = True
+    show_titlebar = False
+    use_system_font = False

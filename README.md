@@ -8,3 +8,6 @@ zsh config file
 vim config file
 #### .tmux.conf
 tmux config file
+#### termainator
+File position
+> ~/.config/terminator/config
