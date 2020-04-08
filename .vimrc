@@ -1,28 +1,47 @@
-" Vundle 环境设置
-set nocompatible              " be iMproved, required
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'derekwyatt/vim-protodef'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'lilydjwg/fcitx.vim'
-Plugin 'mbbill/undotree'
-Plugin 'preservim/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'spf13/vim-autoclose'
-Plugin 'Yggdroot/LeaderF'
-Plugin 'scrooloose/nerdcommenter'
-" 插件列表结束
-"
-call vundle#end()
-"filetype plugin indent on
+" Plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" On-demand loading
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }            执行命令时加载
+" Plug 'scrooloose/nerdtree', { 'for': 'clojure' }                   编辑C文件才加载 
+" Plug 'scrooloose/nerdtree', { 'for': ['clojure', 'java'] }         编辑C,JAVA文件才加载 
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'derekwyatt/vim-protodef'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'suan/vim-instant-markdown'
+Plug 'lilydjwg/fcitx.vim'
+Plug 'mbbill/undotree'
+Plug 'preservim/nerdtree',          { 'on':  'NERDTreeToggle'  }
+Plug 'spf13/vim-autoclose'
+Plug 'Yggdroot/LeaderF'
+Plug 'scrooloose/nerdcommenter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'dense-analysis/ale'
+"修改比较，显示修改
+"Plug 'mhinz/vim-signify'                                           
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-function',   { 'for':['c', 'cpp', 'vim', 'java'] }
+Plug 'sgur/vim-textobj-parameter'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tpope/vim-unimpaired'
+Plug 'Shougo/echodoc.vim'                                                           " 函数参数提示
+Plug 'sbdchd/neoformat'                                                             " 代码格式化
+Plug 'vim-scripts/taglist.vim'                                                      " tag显示
+Plug 'skywind3000/vim-preview'
+"Plug 'skywind3000/gutentags_plus'                                                   " tag 数据库自动切换
+
+call plug#end()
 
 " Vim 配置
 filetype on                                 " 开启文件类型侦测
@@ -31,22 +50,17 @@ syntax enable                               " 开启语法高亮功能
 syntax on                                   " 允许用指定语法高亮配色方案替换默认方案
 let g:Powerline_colorscheme='solarized256'  " 设置状态栏主题风格
 
+" Vim 配色
+set term=screen-256color                    " 兼容tmux
+set background=dark
+"colorscheme solarized
+"colorscheme molokai
+
 " Search
 set incsearch                               " 开启实时搜索功能
 set ignorecase                              " 搜索时大小写不敏感
 set nocompatible                            " 关闭兼容模式
 set wildmenu                                " vim 自身命令行模式智能补全
-
-" Support
-set laststatus=2                            " 总是显示状态栏
-set ruler                                   " 显示光标当前位置
-set number                                  " 开启行号显示
-set cursorline                              " 高亮显示当前行/列
-"set cursorcolumn
-set hlsearch                                " 高亮显示搜索结果
-set nowrap                                  " 禁止折行
-set mouse=a                                 " 打开鼠标
-set gcr=a:block-blinkon0                    " 禁止光标闪烁
 
 " Tab
 set tabstop=4                               " tab替换为4个空格
@@ -60,37 +74,191 @@ set softtabstop=4                           " 关闭softtabstop 永远不要将�
 set foldmethod=syntax                       " 基于缩进或语法进行代码折叠
 set nofoldenable"                           " 启动 vim 时关闭折叠代码
 
-" Vim 配色
-set background=dark
-"colorscheme solarized
-"colorscheme molokai
+" Support
+set laststatus=2                            " 总是显示状态栏
+set ruler                                   " 显示光标当前位置
+set number                                  " 开启行号显示
+set cursorline                              " 高亮显示当前行/列
+"set cursorcolumn
+set hlsearch                                " 高亮显示搜索结果
+set nowrap                                  " 禁止折行
+set mouse=a                                 " 打开鼠标
+"set gcr=a:block-blinkon0                    " 禁止光标闪烁
+set undofile                                " 保存操作记录
+set undodir=~/.vim-config/undo_dirs         " 操作记录保存路径
+set noswapfile                              " 不生成交换文件
+set wrap                                    " 自动换行
+" 缩进
+set foldmethod=syntax
+set backspace=2                             " 解决插入模式下delete/backspce键失效问题
+set noshowmode                              " 参数提示
+let g:echodoc_enable_at_startup = 1
+
+" Return to last edit position when opening files
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" 替换函数。参数说明：
+" confirm：是否替换前逐一确认
+" wholeword：是否整词匹配
+" replace：被替换字符串
+function! Replace(confirm, wholeword, replace)
+    wa
+    let flag = ''
+    if a:confirm
+        let flag .= 'gec'
+    else
+        let flag .= 'ge'
+    endif
+    let search = ''
+    if a:wholeword
+        let search .= '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
+    else
+        let search .= expand('<cword>')
+    endif
+    let replace = escape(a:replace, '/\&~')
+    execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
+endfunction
+" 不确认、非整词
+nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" 不确认、整词
+nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+" 确认、非整词
+nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" 确认、整词
+nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 
 " 定义快捷键的前缀，即<Leader>
 let mapleader=" "
 
 " Map
-map      <Leader>u	:UndotreeToggle	<CR>
-map      <Leader>e	:NERDTreeToggle <CR>
-map      <Leader>t	:TagbarToggle	<CR>
-nmap     <Leader>q	:q  <CR>
-nmap     <Leader>Q	:q! <CR>
-nmap     <Leader>y  "+y
-nmap     <Leader>p  "+p
-nmap     <Leader>w  :w  <CR>
-nmap     <Leader>W  :wq <CR>
+map         <leader>u	    :undotreetoggle	<CR>
+map         <Leader>e	    :NERDTreeToggle <CR>
+map         <Leader>t	    :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+map         <Leader>q	    :q  <CR>
+map         <Leader>Q	    :q! <CR>
+map         <Leader>y       "+y
+map         <Leader>p       "+p
+map         <Leader>w       :w  <CR>
+map         <Leader>W       :wq <CR>
+map         <C-p>           :LeaderfFunctionAll <CR>
+map         <F5>            :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+"map         <Leader>-       :sp <CR>
+"map         <Leader>|       :vs <CR>
+nmap        <Leader>M       %
+nnoremap    <Leader>nw      <c-w><c-w>
+nnoremap    <Leader>lw      <c-w>l
+nnoremap    <Leader>hw      <c-w>h
+nnoremap    <Leader>kw      <c-w>k
+nnoremap    <Leader>jw      <c-w>j
+nnoremap    <Leader>lt      gt
+nnoremap    <Leader>ht      gT
+" leaderf
+"let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
-" 依次遍历子窗口
-nnoremap nw         <C-W><C-W>
-" 跳转至右方的窗口
-nnoremap <Leader>lw <C-W>l
-" 跳转至左方的窗口
-nnoremap <Leader>hw <C-W>h
-" 跳转至上方的子窗口
-nnoremap <Leader>kw <C-W>k
-" 跳转至下方的子窗口
-nnoremap <Leader>jw <C-W>j
-" 定义快捷键在结对符之间跳转
-nmap <Leader>M %
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" search visually selected text literally
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap go :<C-U>Leaderf! rg --recall<CR>
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+map     <leader>ff :LeaderfFile<CR>
+
+" universal-ctags
+set      tags=./.tags;,.tags " 表示在当前工作目录下搜索tags文件
+set      autochdir
+
+" gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']             " gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
+let g:gutentags_ctags_tagfile = '.tags'                                                 " 所生成的数据文件的名称
+let g:gutentags_modules = []                                                            " 同时开启 ctags 和 gtags 支持：
+if executable('ctags')
+	let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+	let g:gutentags_modules += ['gtags_cscope']
+endif
+let g:gutentags_cache_dir = expand('~/.cache/tags')                                     " 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']                    " 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']                         " 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
+let g:gutentags_auto_add_gtags_cscope = 0                                               " 禁用 gutentags 自动加载 gtags 数据库的行为
+"set cscopetag
+"set cscopeprg='gtags-cscope'
+
+" ale
+let g:ale_sign_error = "\ue009\ue009"
+hi! clear SpellBad
+hi! clear SpellCap
+hi! clear SpellRare
+hi! SpellBad gui=undercurl guisp=red
+hi! SpellCap gui=undercurl guisp=blue
+hi! SpellRare gui=undercurl guisp=magenta
+
+let g:ale_sign_column_always = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+"let g:ale_set_quickfix = 1
+"let g:ale_open_list = 1"打开quitfix对话框
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+let g:ale_sign_error = ">>"
+let g:ale_sign_warning = "--"
+map <F7> ::ALEToggle<CR>
+
+" signify
+set updatetime=100
+
+" LeaderF
+"let g:gutentags_define_advanced_commands = 1               "debug
+"let g:Lf_ShortcutF = '<c-p>'
+"let g:Lf_ShortcutB = '<m-n>'
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_Gtagslabel = 'native-pygments'
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':1, 'BufTag':1}
+
+" taglist
+"默认打开Taglist
+let Tlist_Sort_Type = "name"    " 按照名称排序
+let Tlist_Auto_Open=0
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
+let Tlist_Compart_Format = 1    " 压缩方式
+let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer
+let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
+
+" vim-preview
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<CR>
+autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<CR>
 
 if has("cscope")
 	set csprg=/usr/bin/cscope
@@ -124,4 +292,4 @@ if has("cscope")
 endif
 
 " 让配置变更立即生效
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
