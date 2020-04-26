@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/gaorl/.oh-my-zsh"
+export ZSH="/home/gaoruilian/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -104,12 +104,14 @@ source $ZSH/oh-my-zsh.sh
 # alias
 alias pc=proxychains4
 
-# QNX env
-PATH="/home/gaorl/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/gaorl/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/gaorl/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/gaorl/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/gaorl/perl5"; export PERL_MM_OPT;
-
 # autojump
-[[ -s /home/gaorl/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaorl/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/gaoruilian/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaoruilian/.autojump/etc/profile.d/autojump.sh
+
+export PATH=/usr/local/lib/:$PATH
+
+# QNX env
+PATH="/home/gaoruilian/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/gaoruilian/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/gaoruilian/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/gaoruilian/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/gaoruilian/perl5"; export PERL_MM_OPT;

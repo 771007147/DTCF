@@ -13,6 +13,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
+Plug 'rakr/vim-one'
+Plug 'kaicataldo/material.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'derekwyatt/vim-protodef'
 Plug 'Lokaltog/vim-easymotion'
@@ -20,6 +22,7 @@ Plug 'suan/vim-instant-markdown'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdtree',          { 'on':  'NERDTreeToggle'  }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'spf13/vim-autoclose'
 Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdcommenter'
@@ -39,7 +42,7 @@ Plug 'Shougo/echodoc.vim'                                                       
 Plug 'sbdchd/neoformat'                                                             " 代码格式化
 Plug 'vim-scripts/taglist.vim'                                                      " tag显示
 Plug 'skywind3000/vim-preview'
-"Plug 'skywind3000/gutentags_plus'                                                   " tag 数据库自动切换
+Plug 'skywind3000/gutentags_plus'                                                   " tag 数据库自动切换
 
 call plug#end()
 
@@ -51,10 +54,54 @@ syntax on                                   " 允许用指定语法高亮配色�
 let g:Powerline_colorscheme='solarized256'  " 设置状态栏主题风格
 
 " Vim 配色
-set term=screen-256color                    " 兼容tmux
+"set term=screen-256color                    " 兼容tmux
+set term=xterm-256color                     " 兼容tmux
 set background=dark
 "colorscheme solarized
-"colorscheme molokai
+colorscheme one
+"colorscheme material
+"set t_Co=256
+
+" material theme config
+" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
+" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
+" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
+if (has('termguicolors'))
+  set termguicolors
+endif
+
+let g:material_terminal_italics = 1
+"let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+let g:material_theme_style = 'darker'
+
+" one theme config
+"Credit joshdick
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 
 " Search
 set incsearch                               " 开启实时搜索功能
@@ -259,6 +306,21 @@ let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显
 " vim-preview
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<CR>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<CR>
+
+" nerdtree-git-plug
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+"let g:NERDTreeShowIgnoredStatus = 1
 
 if has("cscope")
 	set csprg=/usr/bin/cscope
