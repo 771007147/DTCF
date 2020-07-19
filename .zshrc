@@ -103,9 +103,16 @@ source $ZSH/oh-my-zsh.sh
 
 # alias
 alias pc=proxychains4
+alias ra=ranger
+alias te=tree
+alias v=vim
+alias scrcpy="ADB=~/tools/android-platform-tools/platform-tools/adb scrcpy"
 
 # autojump
 [[ -s /home/gaoruilian/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaoruilian/.autojump/etc/profile.d/autojump.sh
+
+# z
+. /home/gaoruilian/tools/z/z.sh
 
 export PATH=/usr/local/lib/:$PATH
 
@@ -115,3 +122,11 @@ PERL5LIB="/home/gaoruilian/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PER
 PERL_LOCAL_LIB_ROOT="/home/gaoruilian/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/gaoruilian/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/gaoruilian/perl5"; export PERL_MM_OPT;
+
+export EDITOR="/usr/bin/vim"
+
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export ANDROID_PRODUCT_OUT=~/Cauchy-Falcon-Paul/lagvm/LINUX/android/out/target/product/paul/

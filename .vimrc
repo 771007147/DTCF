@@ -22,7 +22,7 @@ Plug 'suan/vim-instant-markdown'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdtree',          { 'on':  'NERDTreeToggle'  }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'spf13/vim-autoclose'
 Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdcommenter'
@@ -43,6 +43,8 @@ Plug 'sbdchd/neoformat'                                                         
 Plug 'vim-scripts/taglist.vim'                                                      " tag显示
 Plug 'skywind3000/vim-preview'
 Plug 'skywind3000/gutentags_plus'                                                   " tag 数据库自动切换
+Plug 'ycm-core/YouCompleteMe'                                                       " 代码提示
+Plug 'dkprice/vim-easygrep'                                                         " Replace
 
 call plug#end()
 
@@ -97,10 +99,10 @@ if (empty($TMUX))
   endif
 endif
 
-if &term =~# '^screen'
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
+"if &term =~# '^screen'
+    "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"endif
 
 
 " Search
@@ -190,6 +192,7 @@ map         <Leader>w       :w  <CR>
 map         <Leader>W       :wq <CR>
 map         <C-p>           :LeaderfFunctionAll <CR>
 map         <F5>            :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+map         <Leader>x       :cclose <CR>
 "map         <Leader>-       :sp <CR>
 "map         <Leader>|       :vs <CR>
 nmap        <Leader>M       %
@@ -284,7 +287,7 @@ let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_WindowHeight = 0.30
+let g:Lf_WindowHeight = 0.5
 let g:Lf_CacheDirectory = expand('~/.vim/cache')
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
@@ -307,6 +310,26 @@ let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<CR>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<CR>
 
+" nerdtree
+"autocmd vimenter * NERDTree  "自动开启Nerdtree
+""let g:NERDTreeWinSize = 25 "设定 NERDTree 视窗大小
+""开启/关闭nerdtree快捷键
+"map <C-f> :NERDTreeToggle<CR>
+""let NERDTreeShowBookmarks=1  " 开启Nerdtree时自动显示Bookmarks
+""打开vim时如果没有文件自动打开NERDTree
+"autocmd vimenter * if !argc()|NERDTree|endif
+""当NERDTree为剩下的唯一窗口时自动关闭
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""设置树的显示图标
+"let g:NERDTreeDirArrowExpandable = '▸'
+"let g:NERDTreeDirArrowCollapsible = '▾'
+"let NERDTreeIgnore = ['\.pyc$']  " 过滤所有.pyc文件不显示
+""let g:NERDTreeShowLineNumbers=1  " 是否显示行号
+"let g:NERDTreeHidden=0     "不显示隐藏文件
+""Making it prettier
+"let NERDTreeMinimalUI = 1
+"let NERDTreeDirArrows = 1 
+
 " nerdtree-git-plug
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
@@ -321,6 +344,39 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 "let g:NERDTreeShowIgnoredStatus = 1
+
+" YCM
+let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+set completeopt=menu,menuone
+
+noremap <c-z> <NOP>
+
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
+let g:ycm_filetype_whitelist = {
+			\ "c":1,
+			\ "cpp":1,
+			\ "objc":1,
+			\ "sh":1,
+			\ "zsh":1,
+			\ "zimbu":1,
+			\ }
+
+" easy-grep
+let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2, 
+let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
+let g:EasyGrepRecursive  = 1 " Recursive searching
+let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
+let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, *.a, *.o, *.pyc, *.bak"
 
 if has("cscope")
 	set csprg=/usr/bin/cscope
