@@ -1,4 +1,4 @@
-## Vim ZSH Tmux Configure Files
+## Development Tool Configuration File
 
 Vim ZSH Tmux Configure Files
 
