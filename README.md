@@ -1,6 +1,6 @@
-## Linux Development Configs
+## Vim ZSH Tmux Configure Files
 
-Linux development config files
+Vim ZSH Tmux Configure Files
 
 #### .zshrc
 zsh config file
@@ -8,6 +8,3 @@ zsh config file
 vim config file
 #### .tmux.conf
 tmux config file
-#### termainator
-File position
-> ~/.config/terminator/config
