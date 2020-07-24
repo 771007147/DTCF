@@ -45,6 +45,7 @@ Plug 'skywind3000/vim-preview'
 Plug 'skywind3000/gutentags_plus'                                                   " tag 数据库自动切换
 Plug 'ycm-core/YouCompleteMe'                                                       " 代码提示
 Plug 'dkprice/vim-easygrep'                                                         " Replace
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -141,6 +142,7 @@ set wrap                                    " 自动换行
 set foldmethod=syntax
 set backspace=2                             " 解决插入模式下delete/backspce键失效问题
 set noshowmode                              " 参数提示
+set clipboard=unnamedplus                   " +寄存器关联到系统剪贴板
 let g:echodoc_enable_at_startup = 1
 
 " Return to last edit position when opening files
