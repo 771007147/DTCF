@@ -46,6 +46,7 @@ Plug 'skywind3000/gutentags_plus'                                               
 Plug 'ycm-core/YouCompleteMe'                                                       " 代码提示
 Plug 'dkprice/vim-easygrep'                                                         " Replace
 Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                 " FZF
 
 call plug#end()
 
@@ -192,7 +193,8 @@ map         <Leader>y       "+y
 map         <Leader>p       "+p
 map         <Leader>w       :w  <CR>
 map         <Leader>W       :wq <CR>
-map         <C-p>           :LeaderfFunctionAll <CR>
+"map         <C-p>           :LeaderfFunctionAll <CR>
+map         <C-p>           :FZF <CR>
 map         <F5>            :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
 map         <Leader>x       :cclose <CR>
 "map         <Leader>-       :sp <CR>
@@ -357,6 +359,9 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
 set completeopt=menu,menuone
+
+" FZF
+
 
 noremap <c-z> <NOP>
 
