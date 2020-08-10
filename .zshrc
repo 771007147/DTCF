@@ -69,9 +69,9 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-        zsh-syntax-highlighting
-        zsh-autosuggestions)
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,6 +106,7 @@ alias pc=proxychains4
 alias ra=ranger
 alias te=tree
 alias v=vim
+alias f=fzf
 alias scrcpy="ADB=~/tools/android-platform-tools/platform-tools/adb scrcpy"
 
 # autojump
@@ -115,6 +116,7 @@ alias scrcpy="ADB=~/tools/android-platform-tools/platform-tools/adb scrcpy"
 . /home/gaoruilian/tools/z/z.sh
 
 export PATH=/usr/local/lib/:$PATH
+export PATH=$PATH:/usr/local/python3/bin/
 
 # QNX env
 PATH="/home/gaoruilian/perl5/bin${PATH:+:${PATH}}"; export PATH;
@@ -130,3 +132,8 @@ export EDITOR="/usr/bin/vim"
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export ANDROID_PRODUCT_OUT=~/Cauchy-Falcon-Paul/lagvm/LINUX/android/out/target/product/paul/
+
+#fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
+export FZF_DEFAULT_COMMAND="fd --exclude={.repo,.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
