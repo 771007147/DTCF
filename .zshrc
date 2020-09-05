@@ -131,9 +131,10 @@ export EDITOR="/usr/bin/vim"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export ANDROID_PRODUCT_OUT=~/Cauchy-Falcon-Paul/lagvm/LINUX/android/out/target/product/paul/
+export ANDROID_PRODUCT_OUT=~/Cauchy-Falcon/lagvm/LINUX/android/out/target/product/falcon/
 
 #fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
-export FZF_DEFAULT_COMMAND="fd --exclude={.repo,.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
+
+#export FZF_DEFAULT_COMMAND="fd --exclude={.repo,.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
