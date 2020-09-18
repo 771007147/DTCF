@@ -116,7 +116,9 @@ alias scrcpy="ADB=~/tools/android-platform-tools/platform-tools/adb scrcpy"
 . /home/gaoruilian/tools/z/z.sh
 
 export PATH=/usr/local/lib/:$PATH
-export PATH=$PATH:/usr/local/python3/bin/
+export PATH=/usr/local/vim/bin/:$PATH
+export PATH=/usr/local/git/bin/:$PATH
+export PATH=/home/gaoruilian/tools/android-platform-tools/platform-tools:$PATH
 
 # QNX env
 PATH="/home/gaoruilian/perl5/bin${PATH:+:${PATH}}"; export PATH;

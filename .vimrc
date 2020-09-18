@@ -8,8 +8,8 @@ call plug#begin('~/.vim/plugged')
 
 " On-demand loading
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }            执行命令时加载
-" Plug 'scrooloose/nerdtree', { 'for': 'clojure' }                   编辑C文件才加载 
-" Plug 'scrooloose/nerdtree', { 'for': ['clojure', 'java'] }         编辑C,JAVA文件才加载 
+" Plug 'scrooloose/nerdtree', { 'for': 'clojure' }                   编辑C文件才加载
+" Plug 'scrooloose/nerdtree', { 'for': ['clojure', 'java'] }         编辑C,JAVA文件才加载
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
@@ -17,20 +17,19 @@ Plug 'rakr/vim-one'
 Plug 'kaicataldo/material.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'derekwyatt/vim-protodef'
-Plug 'Lokaltog/vim-easymotion'
+"Plug 'Lokaltog/vim-easymotion'                                                      " 快速跳转
 Plug 'suan/vim-instant-markdown'
-Plug 'lilydjwg/fcitx.vim'
+"Plug 'lilydjwg/fcitx.vim'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdtree',          { 'on':  'NERDTreeToggle'  }
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'spf13/vim-autoclose'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'                                                           " Check code error
 "修改比较，显示修改
-"Plug 'mhinz/vim-signify'                                           
+Plug 'mhinz/vim-signify'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-syntax'
@@ -43,45 +42,24 @@ Plug 'sbdchd/neoformat'                                                         
 Plug 'vim-scripts/taglist.vim'                                                      " tag显示
 Plug 'skywind3000/vim-preview'
 Plug 'skywind3000/gutentags_plus'                                                   " tag 数据库自动切换
-Plug 'ycm-core/YouCompleteMe'                                                       " 代码提示
-Plug 'dkprice/vim-easygrep'                                                         " Replace
+"Plug 'ycm-core/YouCompleteMe'                                                       " 代码提示
+"Plug 'dkprice/vim-easygrep'                                                         " Replace
 Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                 " FZF
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                 " FZF
+Plug 'ntpeters/vim-better-whitespace'                                               " 显示多余空格
+Plug 'cohama/agit.vim'                                                              " 查看当前文件提交历史
+Plug 'vim-airline/vim-airline'                                                      " 状态栏美化
+Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'                                               " Ctrl+h j k l
+Plug 'mileszs/ack.vim'                                                              " Ack
+Plug 'jiangmiao/auto-pairs'                                                         " 括号close
+Plug 'rking/ag.vim'                                                                 " Search
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
+Plug 'KeitaNakamura/neodark.vim'
+Plug 'tomasr/molokai'
 
 call plug#end()
-
-" Vim 配置
-filetype on                                 " 开启文件类型侦测
-filetype plugin on                          " 根据侦测到的不同类型加载对应的插件
-syntax enable                               " 开启语法高亮功能
-syntax on                                   " 允许用指定语法高亮配色方案替换默认方案
-let g:Powerline_colorscheme='solarized256'  " 设置状态栏主题风格
-
-" Vim 配色
-"set term=screen-256color                    " 兼容tmux
-set term=xterm-256color                     " 兼容tmux
-set background=dark
-"colorscheme solarized
-colorscheme one
-"colorscheme material
-"set t_Co=256
-
-" material theme config
-" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
-
-" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
-" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
-" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
-if (has('termguicolors'))
-  set termguicolors
-endif
-
-let g:material_terminal_italics = 1
-"let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
-let g:material_theme_style = 'darker'
 
 " one theme config
 "Credit joshdick
@@ -106,6 +84,46 @@ endif
     "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 "endif
 
+" Vim 配置
+filetype on                                 " 开启文件类型侦测
+filetype plugin on                          " 根据侦测到的不同类型加载对应的插件
+syntax enable                               " 开启语法高亮功能
+"syntax on                                   " 允许用指定语法高亮配色方案替换默认方案
+let g:Powerline_colorscheme='solarized256'  " 设置状态栏主题风格
+
+" Vim 配色
+set term=screen-256color                    " 兼容tmux
+"set term=xterm-256color                       兼容tmux
+set background=dark
+"colorscheme solarized
+colorscheme one
+"autocmd vimenter * colorscheme gruvbox
+"colorscheme molokai
+"colorscheme neodark
+"let g:neodark#use_256color = 1 " default: 0"
+"let g:neodark#terminal_transparent = 1 " default: 0
+
+"colorscheme material
+"set t_Co=256
+"let g:airline_theme='one'
+
+
+" material theme config
+" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
+" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
+" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
+if (has('termguicolors'))
+  set termguicolors
+endif
+
+let g:material_terminal_italics = 1
+"let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+let g:material_theme_style = 'darker'
 
 " Search
 set incsearch                               " 开启实时搜索功能
@@ -121,8 +139,8 @@ set expandtab                               " tab替换为空格
 set softtabstop=4                           " 关闭softtabstop 永远不要将空格和tab混合输入
 
 " Fold
-"set foldmethod=indent                      " 基于缩进或语法进行代码折叠
-set foldmethod=syntax                       " 基于缩进或语法进行代码折叠
+set foldmethod=indent                      " 基于缩进或语法进行代码折叠
+"set foldmethod=syntax                       "基于缩进或语法进行代码折叠，会导致vim卡顿
 set nofoldenable"                           " 启动 vim 时关闭折叠代码
 
 " Support
@@ -140,10 +158,11 @@ set undodir=~/.vim-config/undo_dirs         " 操作记录保存路径
 set noswapfile                              " 不生成交换文件
 set wrap                                    " 自动换行
 " 缩进
-set foldmethod=syntax
 set backspace=2                             " 解决插入模式下delete/backspce键失效问题
 set noshowmode                              " 参数提示
 set clipboard=unnamedplus                   " +寄存器关联到系统剪贴板
+"set clipboard=unnamed                      "+寄存器关联到系统剪贴板
+set relativenumber                          " 相对行号
 let g:echodoc_enable_at_startup = 1
 
 " Return to last edit position when opening files
@@ -184,7 +203,7 @@ nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' wi
 let mapleader=" "
 
 " Map
-map         <leader>u	    :undotreetoggle	<CR>
+map         <leader>u	    :UndotreeToggle	<CR>
 map         <Leader>e	    :NERDTreeToggle <CR>
 map         <Leader>t	    :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 map         <Leader>q	    :q  <CR>
@@ -193,6 +212,7 @@ map         <Leader>y       "+y
 map         <Leader>p       "+p
 map         <Leader>w       :w  <CR>
 map         <Leader>W       :wq <CR>
+map         <Leader>g       :Agit <CR>
 "map         <C-p>           :LeaderfFunctionAll <CR>
 map         <C-p>           :FZF <CR>
 map         <F5>            :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
@@ -207,6 +227,24 @@ nnoremap    <Leader>kw      <c-w>k
 nnoremap    <Leader>jw      <c-w>j
 nnoremap    <Leader>lt      gt
 nnoremap    <Leader>ht      gT
+noremap <silent><tab>m :tabnew<cr>
+noremap <silent><tab>e :tabclose<cr>
+noremap <silent><tab>n :tabn<cr>
+noremap <silent><tab>p :tabp<cr>
+"noremap <silent><leader>t :tabnew<cr>
+noremap <silent><leader>g :tabclose<cr>
+noremap <silent><leader>1 :tabn 1<cr>
+noremap <silent><leader>2 :tabn 2<cr>
+noremap <silent><leader>3 :tabn 3<cr>
+noremap <silent><leader>4 :tabn 4<cr>
+noremap <silent><leader>5 :tabn 5<cr>
+noremap <silent><leader>6 :tabn 6<cr>
+noremap <silent><leader>7 :tabn 7<cr>
+noremap <silent><leader>8 :tabn 8<cr>
+noremap <silent><leader>9 :tabn 9<cr>
+noremap <silent><leader>0 :tabn 10<cr>
+noremap <silent><s-tab> :tabnext<CR>
+
 " leaderf
 "let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
@@ -225,6 +263,16 @@ noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 map     <leader>ff :LeaderfFile<CR>
+
+" true color
+if has("termguicolors")
+    " fix bug for vim
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+
+    " enable true color
+    set termguicolors
+endif
 
 " universal-ctags
 set      tags=./.tags;,.tags " 表示在当前工作目录下搜索tags文件
@@ -332,7 +380,7 @@ autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<CR>
 "let g:NERDTreeHidden=0     "不显示隐藏文件
 ""Making it prettier
 "let NERDTreeMinimalUI = 1
-"let NERDTreeDirArrows = 1 
+"let NERDTreeDirArrows = 1
 
 " nerdtree-git-plug
 let g:NERDTreeIndicatorMapCustom = {
@@ -362,6 +410,33 @@ set completeopt=menu,menuone
 
 " FZF
 
+" vim-better-whitespace
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_only_modified_lines=1
+let g:strip_whitespace_confirm=0
+let g:current_line_whitespace_disabled_soft=1
+"autocmd FileType c,cpp EnableStripWhitespaceOnSave
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#fnametruncate = 16
+let g:airline#extensions#tabline#fnamecollapse = 2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_theme='deus'  "可以自定义主题，这里使用 badwolf
+
+" UndoTree
+if has("persistent_undo")
+    set undodir=$HOME."/.undodir"
+    set undofile
+endif
+
+" ag search
+"let g:ag_working_path_mode="r"     " 从根目录开始搜索，代替pwd
 
 noremap <c-z> <NOP>
 
@@ -379,7 +454,7 @@ let g:ycm_filetype_whitelist = {
 			\ }
 
 " easy-grep
-let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2, 
+let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2,
 let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
 let g:EasyGrepRecursive  = 1 " Recursive searching
 let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
@@ -395,16 +470,16 @@ if has("cscope")
 	endif
 	"if $CSCOPE_DB != ""
 	"	cs add $CSCOPE_DB
-	"endif	
+	"endif
 	"if $CSCOPE_DB_ADP_COOL != ""
-	"	cs add $CSCOPE_DB_ADP_COOL 
-	"endif	
+	"	cs add $CSCOPE_DB_ADP_COOL
+	"endif
 	if $CSCOPE_DB_ADP_COOL_HQX != ""
 		cs add $CSCOPE_DB_ADP_COOL_HQX
-	endif	
+	endif
 	if $CSCOPE_DB_MARIO_HQX != ""
 		cs add $CSCOPE_DB_MARIO_HQX
-	endif	
+	endif
 	set csverb
 	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
