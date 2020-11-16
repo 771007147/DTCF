@@ -27,14 +27,14 @@ Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'dense-analysis/ale'                                                           " Check code error
+"Plug 'dense-analysis/ale'                                                           " Check code error
 "修改比较，显示修改
 Plug 'mhinz/vim-signify'
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-syntax'
-Plug 'kana/vim-textobj-function',   { 'for':['c', 'cpp', 'vim', 'java'] }
-Plug 'sgur/vim-textobj-parameter'
+"Plug 'kana/vim-textobj-user'
+"Plug 'kana/vim-textobj-indent'
+"Plug 'kana/vim-textobj-syntax'
+"Plug 'kana/vim-textobj-function',   { 'for':['c', 'cpp', 'vim', 'java'] }
+"Plug 'sgur/vim-textobj-parameter'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-unimpaired'
 Plug 'Shougo/echodoc.vim'                                                           " 函数参数提示
