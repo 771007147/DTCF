@@ -69,7 +69,10 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    z
+    cp
     git
+    extract
     zsh-syntax-highlighting
     zsh-autosuggestions)
 
@@ -110,22 +113,13 @@ alias f=fzf
 alias scrcpy="ADB=~/tools/android-platform-tools/platform-tools/adb scrcpy"
 
 # autojump
-[[ -s /home/gaoruilian/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaoruilian/.autojump/etc/profile.d/autojump.sh
-
-# z
-. /home/gaoruilian/tools/z/z.sh
+[[ -s /home/${USER}/.autojump/etc/profile.d/autojump.sh  ]] && source /home/${USER}/.autojump/etc/profile.d/autojump.sh
 
 export PATH=/usr/local/lib/:$PATH
 export PATH=/usr/local/vim/bin/:$PATH
 export PATH=/usr/local/git/bin/:$PATH
-export PATH=/home/gaoruilian/tools/android-platform-tools/platform-tools:$PATH
-
-# QNX env
-PATH="/home/gaoruilian/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/gaoruilian/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/gaoruilian/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/gaoruilian/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/gaoruilian/perl5"; export PERL_MM_OPT;
+export PATH=/home/${USER}/tools/android-platform-tools/platform-tools:$PATH
+export PATH=~/.local/bin:$PATH
 
 export EDITOR="/usr/bin/vim"
 
@@ -140,3 +134,25 @@ export ANDROID_PRODUCT_OUT=~/Cauchy-Falcon/lagvm/LINUX/android/out/target/produc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 
 #export FZF_DEFAULT_COMMAND="fd --exclude={.repo,.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
+
+alias xc="xclip -selection c"
+alias v='vim "$(fzf --reverse --height 35%)"'
+alias c='cd "$(fzf --reverse --height 35%)"'
+
+export DISPLAY=:1
+
+# NIO
+alias tty0="sudo minicom -D /dev/ttyUSB0"
+alias tty1="sudo minicom -D /dev/ttyUSB1"
+alias tty2="sudo minicom -D /dev/ttyUSB2"
+alias tty3="sudo minicom -D /dev/ttyUSB3"
+alias tty4="sudo minicom -D /dev/ttyUSB4"
+alias tty5="sudo minicom -D /dev/ttyUSB5"
+alias tio0="tio /dev/serial/by-id/usb-FTDI_Quad_RS232-HS-if00-port0"
+alias tio1="tio /dev/serial/by-id/usb-FTDI_Quad_RS232-HS-if01-port0"
+alias tio2="tio /dev/serial/by-id/usb-FTDI_Quad_RS232-HS-if02-port0"
+alias tio3="tio /dev/serial/by-id/usb-FTDI_Quad_RS232-HS-if03-port0"
+# JFrog
+export artifactory_username=ruilian.gao
+export artifactory_password=AKCp8kqgP8uBUewCZxE6fp9dcYkzMpVzkU9xFPAUdPQ2ghdYHitnKit5sk84WeHQyhorN3PcL
+

@@ -27,7 +27,7 @@ Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ludovicchabant/vim-gutentags'
-"Plug 'dense-analysis/ale'                                                           " Check code error
+Plug 'dense-analysis/ale'                                                           " Check code error
 "修改比较，显示修改
 Plug 'mhinz/vim-signify'
 "Plug 'kana/vim-textobj-user'
@@ -45,7 +45,7 @@ Plug 'skywind3000/gutentags_plus'                                               
 "Plug 'ycm-core/YouCompleteMe'                                                       " 代码提示
 "Plug 'dkprice/vim-easygrep'                                                         " Replace
 Plug 'tpope/vim-commentary'
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                 " FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                 " FZF
 Plug 'ntpeters/vim-better-whitespace'                                               " 显示多余空格
 Plug 'cohama/agit.vim'                                                              " 查看当前文件提交历史
 Plug 'vim-airline/vim-airline'                                                      " 状态栏美化
@@ -58,6 +58,10 @@ Plug 'rking/ag.vim'                                                             
 Plug 'morhetz/gruvbox'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'tomasr/molokai'
+Plug 'skywind3000/vim-auto-popmenu'
+Plug 'skywind3000/vim-dict'
+
+
 
 call plug#end()
 
@@ -92,7 +96,9 @@ syntax enable                               " 开启语法高亮功能
 let g:Powerline_colorscheme='solarized256'  " 设置状态栏主题风格
 
 " Vim 配色
+if has('vim')
 set term=screen-256color                    " 兼容tmux
+endif
 "set term=xterm-256color                       兼容tmux
 set background=dark
 "colorscheme solarized
@@ -154,7 +160,7 @@ set nowrap                                  " 禁止折行
 set mouse=a                                 " 打开鼠标
 "set gcr=a:block-blinkon0                    " 禁止光标闪烁
 set undofile                                " 保存操作记录
-set undodir=~/.vim-config/undo_dirs         " 操作记录保存路径
+set undodir=$HOME/.vim-config/undo-dir         " 操作记录保存路径
 set noswapfile                              " 不生成交换文件
 set wrap                                    " 自动换行
 " 缩进
@@ -227,6 +233,8 @@ nnoremap    <Leader>kw      <c-w>k
 nnoremap    <Leader>jw      <c-w>j
 nnoremap    <Leader>lt      gt
 nnoremap    <Leader>ht      gT
+nnoremap    <Leader>hb      :bp<cr>
+nnoremap    <Leader>lb      :bn<cr>
 noremap <silent><tab>m :tabnew<cr>
 noremap <silent><tab>e :tabclose<cr>
 noremap <silent><tab>n :tabn<cr>
@@ -247,6 +255,9 @@ noremap <silent><s-tab> :tabnext<CR>
 
 " leaderf
 "let g:Lf_ShortcutF = "<leader>ff"
+let g:gutentags_define_advanced_commands = 1 " debug
+let $GTAGSLABEL='native'
+
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
@@ -263,6 +274,10 @@ noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 map     <leader>ff :LeaderfFile<CR>
+let g:Lf_WorkingDirectoryMode = 'AF'
+let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
+let g:Lf_ShortcutF = '<c-p>'
+
 
 " true color
 if has("termguicolors")
@@ -279,6 +294,10 @@ set      tags=./.tags;,.tags " 表示在当前工作目录下搜索tags文件
 set      autochdir
 
 " gutentags
+"let $GTAGSLABEL = 'pygments'
+let $GTAGSCONF = '/home/${USER}/Tools/gtags.conf'
+
+
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']             " gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
 let g:gutentags_ctags_tagfile = '.tags'                                                 " 所生成的数据文件的名称
 let g:gutentags_modules = []                                                            " 同时开启 ctags 和 gtags 支持：
@@ -289,7 +308,7 @@ if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
 endif
 let g:gutentags_cache_dir = expand('~/.cache/tags')                                     " 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']                    " 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
+let g:gutentags_ctags_extra_args = ['--exclude=*.js', '--fields=+niazS', '--extra=+q']                    " 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']                         " 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
@@ -431,7 +450,7 @@ let g:airline_theme='deus'  "可以自定义主题，这里使用 badwolf
 
 " UndoTree
 if has("persistent_undo")
-    set undodir=$HOME."/.undodir"
+    set undodir=$HOME/.vim-config/undo-dirs
     set undofile
 endif
 
@@ -459,6 +478,22 @@ let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
 let g:EasyGrepRecursive  = 1 " Recursive searching
 let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
 let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, *.a, *.o, *.pyc, *.bak"
+
+" vim-auto-popmenu
+" 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
+let g:apc_enable_ft = {'*':1}
+
+" 设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
+set cpt=.,k,w,b
+
+"" 不要自动选中第一个选项。
+set completeopt=menu,menuone,noselect
+
+" 禁止在下方显示一些啰嗦的提示
+set shortmess+=c"
+
+let g:python3_host_prog = '/usr/bin/python3'
+
 
 if has("cscope")
 	set csprg=/usr/bin/cscope
