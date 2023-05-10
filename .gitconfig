@@ -1,0 +1,18 @@
+[user]
+	name = ruilian.gao
+	email = ruilian.gao@nio.com
+[oh-my-zsh]
+	hide-status = 1
+	hide-dirty = 1
+[color]
+	ui = auto
+[commit]
+	template = /home/nio/.gitmessage
+[http]
+	proxy = localhost:7890
+	sslVerify = false
+[https]
+	proxy = localhost:7890
+	sslVerify = false
+[core]
+	editor = vim
